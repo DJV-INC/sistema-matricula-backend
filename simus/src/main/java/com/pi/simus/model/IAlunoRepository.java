@@ -11,4 +11,5 @@ public interface IAlunoRepository extends JpaRepository<Aluno, Long> {
     public Optional<Aluno> findByCpf(String cpf);
     public Optional<Aluno> findByRg(String rg);
     public Optional<Aluno> findByStatus(boolean status);
+    public String deleteByCpf(String cpf);
 }
