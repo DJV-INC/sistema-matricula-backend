@@ -32,6 +32,7 @@ public class APIAlunoController {
 
     @CrossOrigin
     @GetMapping("alunos")
+    @Transactional
     public ResponseEntity<Object> consultaAluno() {
         logger.info("apicontroller consulta aluno");
 
@@ -40,6 +41,7 @@ public class APIAlunoController {
 
     @CrossOrigin
     @GetMapping("aluno")
+    @Transactional
     public ResponseEntity<Object> consultaPorCpf(@RequestParam(value = "cpf", defaultValue = "") String cpf) {
         logger.info("apicontroller consulta por cpf");
 
@@ -48,6 +50,7 @@ public class APIAlunoController {
 
     @CrossOrigin
     @PostMapping("aluno")
+    @Transactional
     public ResponseEntity<Object> cadastrarAluno(@RequestBody Aluno aluno) {
         logger.info("apicontroller cadastro aluno");
 
@@ -56,6 +59,7 @@ public class APIAlunoController {
 
     @CrossOrigin
     @PutMapping("aluno")
+    @Transactional
     public ResponseEntity<Object> atualizarAluno(@RequestBody Aluno aluno) {
         logger.info("apicontroller atualizar aluno");
 

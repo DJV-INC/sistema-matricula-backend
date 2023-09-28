@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 /*
- * nome completo, e-mail, RG, CPF, data de nascimento, endereço
+ * nome completo, e-mail, RG, CPF, !!!!!!data de nascimento!!!!!!, endereço, !!!!!!!telefone!!!!!!!
  */
 
 @Entity
