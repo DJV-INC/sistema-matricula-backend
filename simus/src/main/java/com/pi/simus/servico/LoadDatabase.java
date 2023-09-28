@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import com.pi.simus.model.Aluno;
 import com.pi.simus.model.IAlunoRepository;
 
+import com.pi.simus.model.Aluno.StatusMatricula;
+
 @Configuration
 public class LoadDatabase {
     Logger logger = LogManager.getLogger(this.getClass());
@@ -28,8 +30,8 @@ public class LoadDatabase {
 
         Aluno aluno3 = new Aluno("12345678910", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com", "Victor Cardoso Andrade", "123456789");
 
-        aluno1.setStatus(true);
-        aluno2.setStatus(true);
+        aluno1.setStatusMatricula(StatusMatricula.ATIVA);
+        aluno2.setStatusMatricula(StatusMatricula.ATIVA);
 
         repository.saveAll(Arrays.asList(aluno1, aluno2, aluno3));
 

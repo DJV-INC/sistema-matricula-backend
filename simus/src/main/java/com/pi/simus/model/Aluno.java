@@ -11,6 +11,12 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Aluno {
+
+    public enum StatusMatricula {
+        ATIVA,
+        INATIVA
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -35,7 +41,7 @@ public class Aluno {
 
     private String rg;
 
-    private boolean status;
+    private StatusMatricula statusMatricula = StatusMatricula.INATIVA;
 
     public Aluno() {
 
@@ -53,7 +59,6 @@ public class Aluno {
         this.email = email;
         this.nomeCompleto = nomeCompleto;
         this.rg = rg;
-        this.status = false;
     }
 
     public Long getId() {
@@ -149,16 +154,12 @@ public class Aluno {
         this.rg = rg;
     }
 
-    public boolean isStatus() {
-        return this.status;
+    public StatusMatricula getStatusMatricula() {
+        return this.statusMatricula;
     }
 
-    public boolean getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setStatusMatricula(StatusMatricula statusMatricula) {
+        this.statusMatricula = statusMatricula;
     }
 
 }

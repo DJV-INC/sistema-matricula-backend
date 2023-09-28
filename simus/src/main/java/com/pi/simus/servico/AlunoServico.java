@@ -1,7 +1,6 @@
 package com.pi.simus.servico;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pi.simus.model.Aluno;
 import com.pi.simus.model.IAlunoRepository;
+import com.pi.simus.model.Aluno.StatusMatricula;
 
 @Service
 public class AlunoServico implements IAlunoServico {
@@ -71,7 +71,7 @@ public class AlunoServico implements IAlunoServico {
         aluno.setEmail(newAluno.getEmail());
         aluno.setNomeCompleto(newAluno.getNomeCompleto());
         aluno.setRg(newAluno.getRg());
-        aluno.setStatus(true);
+        aluno.setStatusMatricula(StatusMatricula.ATIVA);
         return alunoRepository.save(aluno);
       });
     }
