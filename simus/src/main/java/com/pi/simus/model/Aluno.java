@@ -23,6 +23,10 @@ public class Aluno {
 
     private String cpf;
 
+    private String rg;
+
+    private String dataNasc;
+
     private String cep;
 
     private String estado;
@@ -39,17 +43,17 @@ public class Aluno {
 
     private String nomeCompleto;
 
-    private String rg;
-
     private StatusMatricula statusMatricula = StatusMatricula.INATIVA;
 
     public Aluno() {
 
     }
 
-    public Aluno(String cpf, String cep, String estado, String cidade, String bairro, String logradouro, int numero,
-            String email, String nomeCompleto, String rg) {
+
+    public Aluno(String cpf, String rg, String dataNasc, String cep, String estado, String cidade, String bairro, String logradouro, int numero, String email, String nomeCompleto) {
         this.cpf = cpf;
+        this.rg = rg;
+        this.dataNasc = dataNasc;
         this.cep = cep;
         this.estado = estado;
         this.cidade = cidade;
@@ -58,8 +62,17 @@ public class Aluno {
         this.numero = numero;
         this.email = email;
         this.nomeCompleto = nomeCompleto;
-        this.rg = rg;
     }
+    
+
+    public String getDataNasc() {
+        return this.dataNasc;
+    }
+
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
 
     public Long getId() {
         return this.id;
