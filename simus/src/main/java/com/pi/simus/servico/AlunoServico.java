@@ -22,7 +22,7 @@ public class AlunoServico implements IAlunoServico {
 
     @Override
     public Optional<Aluno> consultarPorCpf(String cpf) {
-        logger.info("serviço consulta por cpf iniciado");
+        logger.info("Serviço 'Aluno' consultarPorCpf iniciado");
         Optional<Aluno> aluno = alunoRepository.findByCpf(cpf);
 
         return aluno;
@@ -43,7 +43,7 @@ public class AlunoServico implements IAlunoServico {
 
     @Override
     public List<Aluno> consultaAluno() {
-        logger.info("serviço consulta todos iniciado");
+        logger.info("Serviço 'Aluno' consulta todos iniciado");
         List<Aluno> alunos = alunoRepository.findAll();
 
         return alunos;
@@ -51,14 +51,14 @@ public class AlunoServico implements IAlunoServico {
 
     @Override
     public Optional<Aluno> cadastrarAluno(Aluno aluno) {
-        logger.info("serviço cadastrar aluno iniciado");
+        logger.info("Serviço 'Aluno' cadastrarAluno iniciado");
 
         return Optional.ofNullable(alunoRepository.save(aluno));
     }
 
     @Override
     public Optional<Aluno> atualizarAluno(Aluno newAluno) {
-        logger.info("serviço atualizar aluno iniciado");
+        logger.info("Serviço 'Aluno' atualizarAluno iniciado");
 
         return alunoRepository.findByCpf(newAluno.getCpf())
       .map(aluno -> {
@@ -71,6 +71,8 @@ public class AlunoServico implements IAlunoServico {
         aluno.setEmail(newAluno.getEmail());
         aluno.setNomeCompleto(newAluno.getNomeCompleto());
         aluno.setRg(newAluno.getRg());
+        aluno.setDataNasc(newAluno.getDataNasc());
+        aluno.setTelefone(newAluno.getTelefone());
         aluno.setStatusMatricula(StatusMatricula.ATIVA);
         return alunoRepository.save(aluno);
       });
@@ -78,7 +80,7 @@ public class AlunoServico implements IAlunoServico {
 
     @Override
     public String excluirAluno(String cpf) {
-        logger.info("serviço excluir aluno iniciado");
+        logger.info("Serviço 'Aluno' excluirAluno iniciado");
 
         return alunoRepository.deleteByCpf(cpf);
     }

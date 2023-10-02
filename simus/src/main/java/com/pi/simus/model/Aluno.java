@@ -41,6 +41,8 @@ public class Aluno {
 
     private String email;
 
+    private String telefone;
+
     private String nomeCompleto;
 
     private StatusMatricula statusMatricula = StatusMatricula.INATIVA;
@@ -50,7 +52,8 @@ public class Aluno {
     }
 
 
-    public Aluno(String cpf, String rg, String dataNasc, String cep, String estado, String cidade, String bairro, String logradouro, int numero, String email, String nomeCompleto) {
+
+    public Aluno(String cpf, String rg, String dataNasc, String cep, String estado, String cidade, String bairro, String logradouro, int numero, String email, String telefone, String nomeCompleto) {
         this.cpf = cpf;
         this.rg = rg;
         this.dataNasc = dataNasc;
@@ -61,9 +64,20 @@ public class Aluno {
         this.logradouro = logradouro;
         this.numero = numero;
         this.email = email;
+        this.telefone = telefone;
         this.nomeCompleto = nomeCompleto;
     }
     
+
+
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
 
     public String getDataNasc() {
         return this.dataNasc;
