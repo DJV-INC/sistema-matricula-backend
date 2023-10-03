@@ -24,11 +24,11 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(IAlunoRepository repository) {
         return args -> {
-        Aluno aluno1 = new Aluno("10987654321", "142536789", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Victor Cardoso Andrade");
+        Aluno aluno1 = new Aluno("12345678910", "580940305", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Victor Cardoso Andrade");
 
-        Aluno aluno2 = new Aluno("10987654321", "142536789", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11987654321", "Victor Cardoso Andrade");
+        Aluno aluno2 = new Aluno("54451318823", "123456789", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "test@gmail.com","11987654321", "Victor Cardoso Andrade");
 
-        Aluno aluno3 = new Aluno("10987654321", "142536789", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11912345678", "Victor Cardoso Andrade");
+        Aluno aluno3 = new Aluno("10987654321", "987654321", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "testando@gmail.com","11912345678", "Victor Cardoso Andrade");
 
         aluno1.setStatusMatricula(StatusMatricula.ATIVA);
         aluno2.setStatusMatricula(StatusMatricula.ATIVA);
