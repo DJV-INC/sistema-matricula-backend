@@ -1,11 +1,17 @@
 package com.pi.simus.servico;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.JDBCException;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.pi.simus.model.Aluno;
@@ -31,14 +37,20 @@ public class AlunoServico implements IAlunoServico {
 
     @Override
     public Optional<Aluno> consultarPorRg(String rg) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultarPorRg'");
+        logger.info("Serviço 'Aluno' consultarPorRg iniciado");
+        
+        Optional<Aluno> aluno = alunoRepository.findByRg(rg);
+
+        return aluno;
     }
 
     @Override
-    public Optional<Aluno> consultarPorStatus(boolean status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultarPorStatus'");
+    public List<Aluno> consultarPorStatus(StatusMatricula status) {
+        logger.info("Serviço 'Aluno' consultarPorStatus iniciado");
+
+        List<Aluno> aluno = alunoRepository.findByStatusMatricula(status);
+
+        return aluno;
     }
 
     @Override
@@ -54,6 +66,7 @@ public class AlunoServico implements IAlunoServico {
         logger.info("Serviço 'Aluno' cadastrarAluno iniciado");
 
         return Optional.ofNullable(alunoRepository.save(aluno));
+
     }
 
     @Override
