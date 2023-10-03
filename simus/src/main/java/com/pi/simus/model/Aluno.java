@@ -1,5 +1,6 @@
 package com.pi.simus.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +22,10 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String cpf;
 
+    @Column(unique = true)
     private String rg;
 
     private String dataNasc;
@@ -39,6 +42,7 @@ public class Aluno {
 
     private int numero;
 
+    @Column(unique = true)
     private String email;
 
     private String telefone;
