@@ -45,6 +45,7 @@ public class Aluno {
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
     private String telefone;
 
     private String nomeCompleto;
