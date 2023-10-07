@@ -1,19 +1,12 @@
 package com.pi.simus.servico;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 import com.pi.simus.model.Aluno;
 import com.pi.simus.model.IAlunoRepository;
 import com.pi.simus.model.Aluno.StatusMatricula;
@@ -62,10 +55,17 @@ public class AlunoServico implements IAlunoServico {
     }
 
     @Override
-    public Optional<Aluno> cadastrarAluno(Aluno aluno) {
+    public Optional<Aluno> cadastrarAluno(Aluno newAluno) {
         logger.info("Serviço 'Aluno' cadastrarAluno iniciado");
+        
+        Optional<Aluno> find = alunoRepository.findByCpf(newAluno.getCpf());
 
-        return Optional.ofNullable(alunoRepository.save(aluno));
+        if (find.isPresent()) {
+            return Optional.empty();
+        } else {
+            return Optional.ofNullable(alunoRepository.save(newAluno));
+    
+        }
 
     }
 
@@ -86,7 +86,6 @@ public class AlunoServico implements IAlunoServico {
         aluno.setRg(newAluno.getRg());
         aluno.setDataNasc(newAluno.getDataNasc());
         aluno.setTelefone(newAluno.getTelefone());
-        aluno.setStatusMatricula(StatusMatricula.ATIVA);
         return alunoRepository.save(aluno);
       });
     }
