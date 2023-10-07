@@ -1,16 +1,11 @@
 package com.pi.simus.controller;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -80,7 +74,15 @@ public class APIAlunoController {
     public ResponseEntity<Object> cadastrarAluno(@RequestBody Aluno aluno) {
         logger.info("apicontroller cadastro aluno");
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(alunoServico.cadastrarAluno(aluno));
+        Optional<Aluno> cadastrar = alunoServico.cadastrarAluno(aluno);
+
+        if (cadastrar.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("CPF já cadastrado");
+        } else {
+            return ResponseEntity.status(HttpStatus.CREATED).body(cadastrar);
+        }
+
+        
  
     }
 
