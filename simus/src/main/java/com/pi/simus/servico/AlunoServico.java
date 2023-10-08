@@ -57,16 +57,8 @@ public class AlunoServico implements IAlunoServico {
     @Override
     public Optional<Aluno> cadastrarAluno(Aluno newAluno) {
         logger.info("Serviço 'Aluno' cadastrarAluno iniciado");
-        
-        Optional<Aluno> find = alunoRepository.findByCpf(newAluno.getCpf());
 
-        if (find.isPresent()) {
-            return Optional.empty();
-        } else {
-            return Optional.ofNullable(alunoRepository.save(newAluno));
-    
-        }
-
+        return Optional.ofNullable(alunoRepository.save(newAluno));
     }
 
     @Override

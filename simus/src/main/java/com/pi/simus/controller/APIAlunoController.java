@@ -76,13 +76,8 @@ public class APIAlunoController {
 
         Optional<Aluno> cadastrar = alunoServico.cadastrarAluno(aluno);
 
-        if (cadastrar.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("CPF já cadastrado");
-        } else {
-            return ResponseEntity.status(HttpStatus.CREATED).body(cadastrar);
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(cadastrar);
 
-        
  
     }
 
