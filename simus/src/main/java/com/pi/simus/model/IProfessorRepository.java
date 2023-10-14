@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IProfessorRepository extends JpaRepository<Professor, Long> {
     public Optional<Professor> findByCpf(String cpf);
-    public Optional<Professor> findByNomeCompleto(String nomeCompleto);
+    public List<Professor> findByNomeCompleto(String nomeCompleto);
 }
