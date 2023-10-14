@@ -28,10 +28,10 @@ public class ProfessorServico implements IProfessorServico {
     }
 
     @Override
-    public Optional<Professor> consultaPorNomeCompleto(String nomeCompleto) {
+    public List<Professor> consultaPorNomeCompleto(String nomeCompleto) {
         logger.info("Serviço 'Professor' consultaPorNomeCompleto iniciado");
 
-        Optional<Professor> professor = professorRepository.findByNomeCompleto(nomeCompleto);
+        List<Professor> professor = professorRepository.findByNomeCompleto(nomeCompleto);
 
         return professor;
     }

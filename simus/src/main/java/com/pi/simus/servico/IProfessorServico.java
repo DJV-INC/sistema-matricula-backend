@@ -8,7 +8,7 @@ import com.pi.simus.model.Professor;
 
 public interface IProfessorServico {
     public Optional<Professor> consultaPorCpf(String cpf);
-    public Optional<Professor> consultaPorNomeCompleto(String nomeCompleto);
+    public List<Professor> consultaPorNomeCompleto(String nomeCompleto);
     public List<Professor> consultaProfessor();
     public Optional<Professor> cadastrarProfessor(Professor professor);
     public Optional<Professor> atualizarProfessor(Professor professor);
