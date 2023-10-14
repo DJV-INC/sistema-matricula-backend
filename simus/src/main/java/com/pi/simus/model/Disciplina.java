@@ -1,5 +1,6 @@
 package com.pi.simus.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
@@ -12,8 +13,11 @@ public class Disciplina{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String nome;
 
+    
+    
     public Disciplina(){
 
     }
