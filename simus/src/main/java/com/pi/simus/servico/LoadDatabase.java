@@ -1,6 +1,7 @@
 package com.pi.simus.servico;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,10 +11,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.pi.simus.model.Aluno;
+import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IAlunoRepository;
+import com.pi.simus.model.IDisciplinaRepository;
 import com.pi.simus.model.IProfessorRepository;
+import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Professor;
+import com.pi.simus.model.Turma;
 import com.pi.simus.model.Aluno.StatusMatricula;
+import com.pi.simus.model.Disciplina.Tipo;
 
 @Configuration
 public class LoadDatabase {
@@ -21,6 +27,12 @@ public class LoadDatabase {
 
     @Autowired
     IAlunoRepository alunoRepository;
+
+    @Autowired
+    IDisciplinaRepository disciplinaRepository;
+
+    @Autowired
+    ITurmaRepository turmaRepository;
 
 
     @Bean
@@ -44,6 +56,22 @@ public class LoadDatabase {
         Professor professor3 = new Professor("Paulo Domenech", "12345678910", "11927462417");
 
         professorRepository.saveAll(Arrays.asList(professor1, professor2, professor3));
+
+        Disciplina disciplina1 = new Disciplina("Harmonia", Tipo.OBRIGATORIA);
+
+        Disciplina disciplina2 = new Disciplina("Musica de Câmara", Tipo.OPTATIVA);
+
+        disciplinaRepository.saveAll(Arrays.asList(disciplina1, disciplina2));
+
+        /*Turma turma1 = new Turma(professor3, disciplina1, Calendar.getInstance(), 10, 0, 4);
+
+        Turma turma2 = new Turma(professor1, disciplina1, Calendar.getInstance(), 20, 0, 3);
+
+        Turma turma3 = new Turma(professor2, disciplina2, Calendar.getInstance(), 30, 0, 5);
+        
+        Turma turma4 = new Turma(professor3, disciplina2, Calendar.getInstance(), 15, 0, 6);
+
+        turmaRepository.saveAll(Arrays.asList(turma1,turma2,turma3,turma4));*/
 
         logger.info("Loaddatabase -> aluno cadastrado");
         };
