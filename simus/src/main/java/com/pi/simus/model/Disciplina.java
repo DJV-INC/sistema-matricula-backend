@@ -9,6 +9,12 @@ import jakarta.persistence.Id;
 @Entity
 public class Disciplina{
 
+    public enum Tipo {
+        OBRIGATORIA,
+        OPTATIVA,
+        INSTRUMENTAL
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,14 +22,15 @@ public class Disciplina{
     @Column(unique = true)
     private String nome;
 
-    
+    private Tipo tipo;
     
     public Disciplina(){
 
     }
 
-    public Disciplina(String nome) {
+    public Disciplina(String nome, Tipo tipo) {
         this.nome = nome;
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -42,5 +49,12 @@ public class Disciplina{
         this.nome = nome;
     }
     
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
 
 }
