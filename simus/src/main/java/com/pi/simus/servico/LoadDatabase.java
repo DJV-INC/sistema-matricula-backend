@@ -15,9 +15,9 @@ import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IAlunoRepository;
 import com.pi.simus.model.IDisciplinaRepository;
 import com.pi.simus.model.IProfessorRepository;
-import com.pi.simus.model.ITurmaRepository;
+//import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Professor;
-import com.pi.simus.model.Turma;
+//import com.pi.simus.model.Turma;
 import com.pi.simus.model.Aluno.StatusMatricula;
 import com.pi.simus.model.Disciplina.Tipo;
 
@@ -25,18 +25,9 @@ import com.pi.simus.model.Disciplina.Tipo;
 public class LoadDatabase {
     Logger logger = LogManager.getLogger(this.getClass());
 
-    @Autowired
-    IAlunoRepository alunoRepository;
-
-    @Autowired
-    IDisciplinaRepository disciplinaRepository;
-
-    @Autowired
-    ITurmaRepository turmaRepository;
-
 
     @Bean
-    CommandLineRunner initDatabase(IProfessorRepository professorRepository) {
+    CommandLineRunner initDatabase(IProfessorRepository professorRepository, IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository) {
         return args -> {
         Aluno aluno1 = new Aluno("12345678910", "580940305", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Victor Cardoso Andrade");
 

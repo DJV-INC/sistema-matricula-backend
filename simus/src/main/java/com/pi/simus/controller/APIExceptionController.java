@@ -17,5 +17,8 @@ public class APIExceptionController {
         reason = "Dados já cadastrados, verificar dados")
     @ExceptionHandler(DataIntegrityViolationException.class)
     public void handleSQLException(DataIntegrityViolationException e) {
+      /*Não há necessidade do método realizar qualquer outra ação no momento, pois a mensagem de erro já e 
+       * dada pelo @ResponseStatus
+       */
     }
 }
