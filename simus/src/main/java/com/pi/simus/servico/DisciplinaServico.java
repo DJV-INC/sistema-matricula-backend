@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pi.simus.model.Disciplina;
+import com.pi.simus.model.Disciplina.Tipo;
 import com.pi.simus.model.IDisciplinaRepository;
 import com.pi.simus.servico.IDisciplinaServico;
 
@@ -30,6 +31,8 @@ public class DisciplinaServico implements IDisciplinaServico{
 
     }
 
+    
+
     @Override
     public Optional<Disciplina> consultarPorNome(String nome) {
         logger.info("Serviço 'Disciplina' consultar por nome iniciado");
@@ -38,6 +41,22 @@ public class DisciplinaServico implements IDisciplinaServico{
 
         return disciplina;
 
+    }
+
+    @Override
+    public List<Disciplina> consultaPorTipo(Tipo tipo) {
+        logger.info("Serviço 'Disciplina' consultar por tipo iniciado");
+
+        List<Disciplina> disciplinas = disciplinaRepository.findByTipo(tipo);
+
+        return disciplinas;
+    }
+
+    @Override
+    public Optional<Disciplina> consultaPorId(Long id) {
+        Optional<Disciplina> disciplina = disciplinaRepository.findById(id);
+
+        return disciplina;
     }
 
     @Override
@@ -64,5 +83,11 @@ public class DisciplinaServico implements IDisciplinaServico{
 
         disciplinaRepository.deleteById(id);
     }
+
+
+
+    
+
+    
 
 }
