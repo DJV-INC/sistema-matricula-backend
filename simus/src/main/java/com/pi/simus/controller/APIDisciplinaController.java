@@ -19,6 +19,7 @@ import com.pi.simus.servico.IDisciplinaServico;
 import jakarta.transaction.Transactional;
 
 import com.pi.simus.model.Disciplina;
+import com.pi.simus.model.Disciplina.Tipo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,6 +49,15 @@ public class APIDisciplinaController{
 
         logger.info("apicontroller consultar por nome");
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.consultarPorNome(nome));
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "disciplinas", params = "tipo")
+    @Transactional
+    public ResponseEntity<Object> consultarPorTipo(@RequestParam(value = "tipo") Tipo tipo) {
+        logger.info("apicontroller consultar por tipo");
+
+        return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.consultaPorTipo(tipo));
     }
 
     @CrossOrigin
