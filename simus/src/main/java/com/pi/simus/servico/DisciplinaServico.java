@@ -73,6 +73,7 @@ public class DisciplinaServico implements IDisciplinaServico{
         return disciplinaRepository.findById(newDisciplina.getId())
         .map(disciplina -> {
             disciplina.setNome(newDisciplina.getNome());
+            disciplina.setTipo(newDisciplina.getTipo());
             return disciplinaRepository.save(disciplina);
         });
     }
