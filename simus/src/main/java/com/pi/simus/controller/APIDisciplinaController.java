@@ -61,6 +61,15 @@ public class APIDisciplinaController{
     }
 
     @CrossOrigin
+    @GetMapping(value = "disciplinas", params = "id")
+    @Transactional
+    public ResponseEntity<Object> consultaPorId(@RequestParam(value = "id") Long id) {
+        logger.info("apicontroller consultar por id");
+
+        return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.consultaPorId(id));
+    }
+
+    @CrossOrigin
     @PostMapping("disciplinas")
     @Transactional
     public ResponseEntity<Object> cadastrarDisciplina(@RequestBody Disciplina disciplina){
