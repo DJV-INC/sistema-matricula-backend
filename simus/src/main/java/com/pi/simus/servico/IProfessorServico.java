@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.pi.simus.model.Professor;
 
 public interface IProfessorServico {
+    public Optional<Professor> consultaPorId(Long Id);
     public Optional<Professor> consultaPorCpf(String cpf);
     public List<Professor> consultaPorNomeCompleto(String nomeCompleto);
     public List<Professor> consultaProfessor();
