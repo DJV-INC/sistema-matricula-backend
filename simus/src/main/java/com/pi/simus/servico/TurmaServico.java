@@ -39,6 +39,13 @@ public class TurmaServico implements ITurmaServico {
     }
 
     @Override
+    public Optional<Turma> consultaPorId(Long id) {
+        logger.info("Serviço 'Turma' consultaPorId iniciado");
+
+        return turmaRepository.findById(id);
+    }
+
+    @Override
     public Optional<Turma> cadastrarTurma(Turma turma) {
         logger.info("Serviço 'Turma' consultaPorDisciplina iniciado");
 
@@ -46,9 +53,18 @@ public class TurmaServico implements ITurmaServico {
     }
 
     @Override
-    public Optional<Turma> atualizarTurma(Turma turma) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarTurma'");
+    public Optional<Turma> atualizarTurma(Turma newTurma) {
+        logger.info("Serviço 'Turma' atualizarTurma");
+
+        return turmaRepository.findById(newTurma.getId())
+        .map(turma -> {
+            turma.setProfessor(newTurma.getProfessor());
+            turma.setHorario(newTurma.getHorario());
+            turma.setNumeroVagas(newTurma.getNumeroVagas());
+            turma.setNumeroAlunos(newTurma.getNumeroAlunos());
+            turma.setDiaSemana(newTurma.getDiaSemana());
+            return turmaRepository.save(turma);
+        });
     }
 
     @Override
