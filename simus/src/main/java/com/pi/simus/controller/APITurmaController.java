@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,9 @@ public class APITurmaController {
     @GetMapping(value = "turmas", params = "id")
     @Transactional
     public ResponseEntity<Object> consultaTurma(@RequestParam(value = "id") Long id) {
+
+        logger.info("apicontroller consulta turma");
+
         Optional<Disciplina> dis = disciplinaServico.consultaPorId(id);
 
         List<Turma> turmas = turmaServico.consultaPorDisciplina(dis);
@@ -60,6 +64,8 @@ public class APITurmaController {
     public ResponseEntity<Object> cadastrarTurma(@RequestParam(value = "professor_id") Long professor_id, 
     @RequestParam(value = "disciplina_id") Long disciplina_id, @RequestBody Turma turma) {
 
+        logger.info("apicontroller cadastrar turma");
+
         Optional<Professor> prof = professorServico.consultaPorId(professor_id);
 
         Optional<Disciplina> dis = disciplinaServico.consultaPorId(disciplina_id);
@@ -72,5 +78,14 @@ public class APITurmaController {
 
         return ResponseEntity.status(HttpStatus.OK).body(newTurma);
         
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "turmas")
+    @Transactional
+    public ResponseEntity<Object> atualizarTurma(@RequestBody Turma turma) {
+        logger.info("apicontroller atualizar turma");
+
+        return ResponseEntity.status(HttpStatus.OK).body(turmaServico.atualizarTurma(turma));
     }
 }
