@@ -69,8 +69,9 @@ public class TurmaServico implements ITurmaServico {
 
     @Override
     public void excluirTurma(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'excluirTurma'");
+        logger.info("Serviço 'Turma' ExcluirTurma");
+
+        turmaRepository.deleteById(id);
     }
 
 
