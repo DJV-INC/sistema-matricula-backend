@@ -15,9 +15,9 @@ import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IAlunoRepository;
 import com.pi.simus.model.IDisciplinaRepository;
 import com.pi.simus.model.IProfessorRepository;
-//import com.pi.simus.model.ITurmaRepository;
+import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Professor;
-//import com.pi.simus.model.Turma;
+import com.pi.simus.model.Turma;
 import com.pi.simus.model.Aluno.StatusMatricula;
 import com.pi.simus.model.Disciplina.Tipo;
 
@@ -27,7 +27,7 @@ public class LoadDatabase {
 
 
     @Bean
-    CommandLineRunner initDatabase(IProfessorRepository professorRepository, IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository) {
+    CommandLineRunner initDatabase(IProfessorRepository professorRepository, IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository, ITurmaRepository turmaRepository) {
         return args -> {
         Aluno aluno1 = new Aluno("12345678910", "580940305", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Victor Cardoso Andrade");
 
@@ -54,15 +54,15 @@ public class LoadDatabase {
 
         disciplinaRepository.saveAll(Arrays.asList(disciplina1, disciplina2));
 
-        /*Turma turma1 = new Turma(professor3, disciplina1, Calendar.getInstance(), 10, 0, 4);
+        Turma turma1 = new Turma(professor3, disciplina1, "18:00", 10, 0, "Quinta-feira");
 
-        Turma turma2 = new Turma(professor1, disciplina1, Calendar.getInstance(), 20, 0, 3);
+        Turma turma2 = new Turma(professor1, disciplina1, "13:00", 20, 0, "Sexta-feira");
 
-        Turma turma3 = new Turma(professor2, disciplina2, Calendar.getInstance(), 30, 0, 5);
+        Turma turma3 = new Turma(professor2, disciplina2, "19:00", 30, 0, "Quarta-feira");
         
-        Turma turma4 = new Turma(professor3, disciplina2, Calendar.getInstance(), 15, 0, 6);
+        Turma turma4 = new Turma(professor3, disciplina2, "09:00", 15, 0, "Segunda-feira");
 
-        turmaRepository.saveAll(Arrays.asList(turma1,turma2,turma3,turma4));*/
+        turmaRepository.saveAll(Arrays.asList(turma1,turma2,turma3,turma4));
 
         logger.info("Loaddatabase -> aluno cadastrado");
         };
