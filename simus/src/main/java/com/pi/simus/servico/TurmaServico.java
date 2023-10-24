@@ -1,5 +1,6 @@
 package com.pi.simus.servico;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IDisciplinaRepository;
+import com.pi.simus.model.IProfessorRepository;
 import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Turma;
 
@@ -24,8 +26,12 @@ public class TurmaServico implements ITurmaServico {
     @Autowired
     IDisciplinaRepository disciplinaRepository;
 
+    @Autowired
+    IProfessorRepository professorRepository;
+
     @Override
     public List<Turma> consultaPorDisciplina(Optional<Disciplina> disciplina) {
+        logger.info("Serviço 'Turma' consultaPorDisciplina iniciado");
 
         List<Turma> turmas = turmaRepository.findByDisciplina(disciplina);
 
@@ -34,8 +40,9 @@ public class TurmaServico implements ITurmaServico {
 
     @Override
     public Optional<Turma> cadastrarTurma(Turma turma) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarTurma'");
+        logger.info("Serviço 'Turma' consultaPorDisciplina iniciado");
+
+        return Optional.ofNullable(turmaRepository.save(turma));
     }
 
     @Override
