@@ -5,9 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.engine.transaction.jta.platform.internal.OC4JJtaPlatform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -81,11 +84,22 @@ public class APITurmaController {
     }
 
     @CrossOrigin
-    @PutMapping(value = "turmas")
+    @PutMapping("turmas")
     @Transactional
     public ResponseEntity<Object> atualizarTurma(@RequestBody Turma turma) {
         logger.info("apicontroller atualizar turma");
 
         return ResponseEntity.status(HttpStatus.OK).body(turmaServico.atualizarTurma(turma));
+    }
+
+    @CrossOrigin
+    @DeleteMapping("turmas/{id}")
+    @Transactional
+    public ResponseEntity<Object> excluirTurma(@PathVariable Long id) {
+        logger.info("apicontroller excluir turma");
+
+        turmaServico.excluirTurma(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Turma deletada");
     }
 }
