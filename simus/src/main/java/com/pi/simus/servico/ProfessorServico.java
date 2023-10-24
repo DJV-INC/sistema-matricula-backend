@@ -19,6 +19,15 @@ public class ProfessorServico implements IProfessorServico {
     IProfessorRepository professorRepository;
 
     @Override
+    public Optional<Professor> consultaPorId(Long id) {
+        logger.info("Serviço 'Professor' consultaPorId iniciado");
+
+        Optional<Professor> professor = professorRepository.findById(id);
+
+        return professor;
+    }
+
+    @Override
     public Optional<Professor> consultaPorCpf(String cpf) {
         logger.info("Serviço 'Professor' consultaPorCpf iniciado");
 
