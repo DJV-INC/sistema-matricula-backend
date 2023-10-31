@@ -62,6 +62,17 @@ public class APITurmaController {
     }
 
     @CrossOrigin
+    @GetMapping(value = "turmas", params = "id_professor")
+    @Transactional
+    public ResponseEntity<Object> consultaTurmaProfessor(@RequestParam(value = "id_professor") Long id_professor) {
+        logger.info("apicontroller consulta turma professor");
+
+        Optional<Professor> professor = professorServico.consultaPorId(id_professor);
+
+        return ResponseEntity.status(HttpStatus.OK).body(turmaServico.consultaPorProfessor(professor));
+    }
+
+    @CrossOrigin
     @PostMapping(value = "turmas")
     @Transactional
     public ResponseEntity<Object> cadastrarTurma(@RequestParam(value = "professor_id") Long professor_id, 
