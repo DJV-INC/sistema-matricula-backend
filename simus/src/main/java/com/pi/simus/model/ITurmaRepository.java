@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface ITurmaRepository extends JpaRepository<Turma, Long>{
+    public List<Turma> findByProfessor(Optional<Professor> professor);
     public List<Turma> findByDisciplina(Optional<Disciplina> disciplina);
 }
