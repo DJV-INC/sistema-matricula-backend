@@ -13,6 +13,7 @@ import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IDisciplinaRepository;
 import com.pi.simus.model.IProfessorRepository;
 import com.pi.simus.model.ITurmaRepository;
+import com.pi.simus.model.Professor;
 import com.pi.simus.model.Turma;
 
 
@@ -34,6 +35,15 @@ public class TurmaServico implements ITurmaServico {
         logger.info("Serviço 'Turma' consultaPorDisciplina iniciado");
 
         List<Turma> turmas = turmaRepository.findByDisciplina(disciplina);
+
+        return turmas;
+    }
+
+    @Override
+    public List<Turma> consultaPorProfessor(Optional<Professor> professor) {
+        logger.info("Serviço 'Turma' consultaPorProfessor iniciado");
+
+        List<Turma> turmas = turmaRepository.findByProfessor(professor);
 
         return turmas;
     }
