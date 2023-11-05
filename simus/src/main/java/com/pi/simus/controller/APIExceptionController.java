@@ -2,23 +2,41 @@ package com.pi.simus.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.sql.SQLException;
+import com.pi.simus.model.Resposta;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.Endpoint;
+
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.http.ResponseEntity;
 
 @ControllerAdvice
 public class APIExceptionController {
-  @ResponseStatus(
-        value = HttpStatus.BAD_REQUEST,
-        reason = "Dados já cadastrados, verificar dados")
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public void handleSQLException(DataIntegrityViolationException e) {
-      /*Não há necessidade do método realizar qualquer outra ação no momento, pois a mensagem de erro já e 
-       * dada pelo @ResponseStatus
-       */
-    }
+
+  Resposta resposta;
+
+
+  Logger logger = LogManager.getLogger(this.getClass());
+
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity<Resposta> handleSQLException(HttpServletRequest req,ConstraintViolationException e) {
+
+    resposta = new Resposta();
+
+    resposta.setErro(e.getSQLState());
+    resposta.setMensagem(e.getLocalizedMessage());
+    resposta.setStatus(HttpStatus.BAD_REQUEST);
+    resposta.setCaminho(req.getRequestURL().toString());
+    resposta.setMetodo(req.getMethod());
+
+    return new ResponseEntity(resposta, resposta.getStatus());
+  }
 }
