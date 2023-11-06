@@ -83,10 +83,10 @@ public class AlunoServico implements IAlunoServico {
     }
 
     @Override
-    public String excluirAluno(String cpf) {
+    public void excluirAluno(Long id) {
         logger.info("Serviço 'Aluno' excluirAluno iniciado");
 
-        return alunoRepository.deleteByCpf(cpf);
+        alunoRepository.deleteById(id);
     }
 
 }
