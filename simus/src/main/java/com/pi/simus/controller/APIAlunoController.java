@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pi.simus.model.Aluno;
 import com.pi.simus.model.Aluno.StatusMatricula;
+import com.pi.simus.model.Resposta;
 import com.pi.simus.servico.IAlunoServico;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
 @RestController
@@ -91,12 +93,21 @@ public class APIAlunoController {
     }
 
     @CrossOrigin
-    @DeleteMapping("alunos/{cpf}")
+    @DeleteMapping("alunos/{id}")
     @Transactional
-    public ResponseEntity<Object> excluirAluno(@PathVariable String cpf) {
+    public ResponseEntity<Object> excluirAluno(@PathVariable Long id, HttpServletRequest req) {
         logger.info("apicontroller excluir aluno");
 
-        return ResponseEntity.status(HttpStatus.OK).body(alunoServico.excluirAluno(cpf));
+        alunoServico.excluirAluno(id);
+
+        Resposta resposta = new Resposta();
+
+        resposta.setMensagem("Aluno deletado com sucesso");
+        resposta.setStatus(HttpStatus.OK);
+        resposta.setCaminho(req.getRequestURL().toString());
+        resposta.setMetodo(req.getMethod());
+
+        return ResponseEntity.status(resposta.getStatus()).body(resposta);
     }
 
 }

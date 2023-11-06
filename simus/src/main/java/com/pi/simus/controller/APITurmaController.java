@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,10 +27,12 @@ import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.Turma;
 import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Professor;
+import com.pi.simus.model.Resposta;
 import com.pi.simus.servico.IDisciplinaServico;
 import com.pi.simus.servico.IProfessorServico;
 import com.pi.simus.servico.ITurmaServico;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
 
@@ -95,7 +98,7 @@ public class APITurmaController {
     }
 
     @CrossOrigin
-    @PutMapping("turmas")
+    @PatchMapping("turmas")
     @Transactional
     public ResponseEntity<Object> atualizarTurma(@RequestBody Turma turma) {
         logger.info("apicontroller atualizar turma");
@@ -106,11 +109,18 @@ public class APITurmaController {
     @CrossOrigin
     @DeleteMapping("turmas/{id}")
     @Transactional
-    public ResponseEntity<Object> excluirTurma(@PathVariable Long id) {
+    public ResponseEntity<Object> excluirTurma(@PathVariable Long id, HttpServletRequest req) {
         logger.info("apicontroller excluir turma");
 
         turmaServico.excluirTurma(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Turma deletada");
+        Resposta resposta = new Resposta();
+
+        resposta.setMensagem("Turma deletada com sucesso");
+        resposta.setStatus(HttpStatus.OK);
+        resposta.setCaminho(req.getRequestURL().toString());
+        resposta.setMetodo(req.getMethod());
+
+        return ResponseEntity.status(resposta.getStatus()).body(resposta);
     }
 }

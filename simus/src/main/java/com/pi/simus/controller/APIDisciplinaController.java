@@ -16,18 +16,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.pi.simus.servico.IDisciplinaServico;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
 import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.Disciplina.Tipo;
+import com.pi.simus.model.Resposta;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 @RestController
 @RequestMapping("api/v1")
-public class APIDisciplinaController{
+public class APIDisciplinaController {
     Logger logger = LogManager.getLogger(this.getClass());
 
     @Autowired
@@ -36,7 +37,7 @@ public class APIDisciplinaController{
     @CrossOrigin
     @GetMapping("disciplinas")
     @Transactional
-    public ResponseEntity<Object> consultaDisciplina(){
+    public ResponseEntity<Object> consultaDisciplina() {
 
         logger.info("apicontroller consulta disciplina");
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.consultaDisciplina());
@@ -45,7 +46,7 @@ public class APIDisciplinaController{
     @CrossOrigin
     @GetMapping(value = "disciplinas", params = "nome")
     @Transactional
-    public ResponseEntity<Object> consultarPorNome(@RequestParam(value = "nome") String nome){
+    public ResponseEntity<Object> consultarPorNome(@RequestParam(value = "nome") String nome) {
 
         logger.info("apicontroller consultar por nome");
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.consultarPorNome(nome));
@@ -72,17 +73,17 @@ public class APIDisciplinaController{
     @CrossOrigin
     @PostMapping("disciplinas")
     @Transactional
-    public ResponseEntity<Object> cadastrarDisciplina(@RequestBody Disciplina disciplina){
+    public ResponseEntity<Object> cadastrarDisciplina(@RequestBody Disciplina disciplina) {
 
         logger.info("apicontroller cadastrar disciplina");
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.cadastrarDisciplina(disciplina));
-    
+
     }
 
     @CrossOrigin
     @PatchMapping("disciplinas")
     @Transactional
-    public ResponseEntity<Object> atualizarDisciplina(@RequestBody Disciplina disciplina){
+    public ResponseEntity<Object> atualizarDisciplina(@RequestBody Disciplina disciplina) {
 
         logger.info("apicontroller atualizar disciplina");
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaServico.atualizarDisciplina(disciplina));
@@ -92,14 +93,20 @@ public class APIDisciplinaController{
     @CrossOrigin
     @DeleteMapping("disciplinas/{id}")
     @Transactional
-    public ResponseEntity<Object> deletarDisciplinas(@PathVariable Long id){
+    public ResponseEntity<Object> deletarDisciplinas(@PathVariable Long id, HttpServletRequest req) {
 
         logger.info("apicontroller deletar disciplina");
 
         disciplinaServico.excluirPorId(id);
 
+        Resposta resposta = new Resposta();
 
-        return ResponseEntity.status(HttpStatus.OK).body("Disciplina deletada");
+        resposta.setMensagem("Disciplina deletada com sucesso");
+        resposta.setStatus(HttpStatus.OK);
+        resposta.setCaminho(req.getRequestURL().toString());
+        resposta.setMetodo(req.getMethod());
+
+        return ResponseEntity.status(resposta.getStatus()).body(resposta);
 
     }
 
