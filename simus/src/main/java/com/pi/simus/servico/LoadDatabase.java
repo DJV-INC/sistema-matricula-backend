@@ -14,8 +14,10 @@ import com.pi.simus.model.Aluno;
 import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IAlunoRepository;
 import com.pi.simus.model.IDisciplinaRepository;
+import com.pi.simus.model.IMatriculaRepository;
 import com.pi.simus.model.IProfessorRepository;
 import com.pi.simus.model.ITurmaRepository;
+import com.pi.simus.model.Matricula;
 import com.pi.simus.model.Professor;
 import com.pi.simus.model.Turma;
 import com.pi.simus.model.Aluno.StatusMatricula;
@@ -27,13 +29,13 @@ public class LoadDatabase {
 
 
     @Bean
-    CommandLineRunner initDatabase(IProfessorRepository professorRepository, IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository, ITurmaRepository turmaRepository) {
+    CommandLineRunner initDatabase(IProfessorRepository professorRepository, IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository, ITurmaRepository turmaRepository, IMatriculaRepository matriculaRepository) {
         return args -> {
-        Aluno aluno1 = new Aluno("12345678910", "580940305", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Victor Cardoso Andrade");
+        Aluno aluno1 = new Aluno("12345678910", "580940305", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Aluno 1");
 
-        Aluno aluno2 = new Aluno("54451318823", "123456789", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "test@gmail.com","11987654321", "Victor Cardoso Andrade");
+        Aluno aluno2 = new Aluno("54451318823", "123456789", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "test@gmail.com","11987654321", "Aluno 2");
 
-        Aluno aluno3 = new Aluno("10987654321", "987654321", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "testando@gmail.com","11912345678", "Victor Cardoso Andrade");
+        Aluno aluno3 = new Aluno("10987654321", "987654321", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "testando@gmail.com","11912345678", "Aluno 3");
 
         aluno1.setStatusMatricula(StatusMatricula.ATIVA);
         aluno2.setStatusMatricula(StatusMatricula.ATIVA);
@@ -64,7 +66,20 @@ public class LoadDatabase {
 
         turmaRepository.saveAll(Arrays.asList(turma1,turma2,turma3,turma4));
 
-        logger.info("Loaddatabase -> aluno cadastrado");
+        Matricula matricula1 = new Matricula(aluno1, turma1);
+
+        Matricula matricula2 = new Matricula(aluno2, turma2);
+
+        Matricula matricula3 = new Matricula(aluno3, turma3);
+
+        Matricula matricula4 = new Matricula(aluno1, turma4);
+
+        Matricula matricula5 = new Matricula(aluno2, turma1);
+
+        matriculaRepository.saveAll(Arrays.asList(matricula1, matricula2, matricula3, matricula4, matricula5));
+
+
+        logger.info("Loaddatabase -> alunos, professores, disciplinas, turmas e matriculas cadastradas");
         };
     }
 }
