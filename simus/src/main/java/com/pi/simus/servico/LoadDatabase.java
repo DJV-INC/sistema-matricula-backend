@@ -20,7 +20,7 @@ import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Matricula;
 import com.pi.simus.model.Professor;
 import com.pi.simus.model.Turma;
-import com.pi.simus.model.Aluno.StatusMatricula;
+import com.pi.simus.model.StatusMatricula;
 import com.pi.simus.model.Disciplina.Tipo;
 
 @Configuration

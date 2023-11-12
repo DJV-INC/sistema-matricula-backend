@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.pi.simus.model.Aluno;
-import com.pi.simus.model.Aluno.StatusMatricula;
+import com.pi.simus.model.StatusMatricula;
 
 public interface IAlunoServico {
     public Optional<Aluno> consultarPorCpf(String cpf);

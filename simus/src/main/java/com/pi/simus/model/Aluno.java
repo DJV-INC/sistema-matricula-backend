@@ -12,12 +12,6 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Aluno {
-
-    public enum StatusMatricula {
-        ATIVA,
-        INATIVA
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pi.simus.model.Aluno;
-import com.pi.simus.model.Aluno.StatusMatricula;
+import com.pi.simus.model.StatusMatricula;
 import com.pi.simus.model.Resposta;
 import com.pi.simus.servico.IAlunoServico;
 

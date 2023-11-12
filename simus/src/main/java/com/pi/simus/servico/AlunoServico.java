@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.pi.simus.model.Aluno;
 import com.pi.simus.model.IAlunoRepository;
-import com.pi.simus.model.Aluno.StatusMatricula;
+import com.pi.simus.model.StatusMatricula;
+
 
 @Service
 public class AlunoServico implements IAlunoServico {
