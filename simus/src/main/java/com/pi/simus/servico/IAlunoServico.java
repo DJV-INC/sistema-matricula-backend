@@ -13,5 +13,5 @@ public interface IAlunoServico {
     public List<Aluno> consultaAluno();
     public Optional<Aluno> cadastrarAluno(Aluno aluno);
     public Optional<Aluno> atualizarAluno(Aluno aluno);
-    public void excluirAluno(Long id);
+    public void excluirAluno(String cpf);
 }

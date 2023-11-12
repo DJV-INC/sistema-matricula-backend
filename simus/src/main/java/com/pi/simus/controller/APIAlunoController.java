@@ -93,12 +93,12 @@ public class APIAlunoController {
     }
 
     @CrossOrigin
-    @DeleteMapping("alunos/{id}")
+    @DeleteMapping("alunos/{cpf}")
     @Transactional
-    public ResponseEntity<Object> excluirAluno(@PathVariable Long id, HttpServletRequest req) {
+    public ResponseEntity<Object> excluirAluno(@PathVariable String cpf, HttpServletRequest req) {
         logger.info("apicontroller excluir aluno");
 
-        alunoServico.excluirAluno(id);
+        alunoServico.excluirAluno(cpf);
 
         Resposta resposta = new Resposta();
 
