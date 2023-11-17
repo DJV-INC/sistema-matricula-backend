@@ -21,6 +21,14 @@ public class AlunoServico implements IAlunoServico {
     IAlunoRepository alunoRepository;
 
     @Override
+    public Optional<Aluno> consultarPorId(Long id) {
+        logger.info("Serviço 'Aluno' consultarPorId iniciado");
+
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        return aluno;
+    }
+
+    @Override
     public Optional<Aluno> consultarPorCpf(String cpf) {
         logger.info("Serviço 'Aluno' consultarPorCpf iniciado");
         Optional<Aluno> aluno = alunoRepository.findByCpf(cpf);
