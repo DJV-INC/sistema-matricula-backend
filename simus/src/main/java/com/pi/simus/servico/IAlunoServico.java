@@ -7,6 +7,7 @@ import com.pi.simus.model.Aluno;
 import com.pi.simus.model.StatusMatricula;
 
 public interface IAlunoServico {
+    public Optional<Aluno> consultarPorId(Long id);
     public Optional<Aluno> consultarPorCpf(String cpf);
     public Optional<Aluno> consultarPorRg(String rg);
     public List<Aluno> consultarPorStatus(StatusMatricula status);
