@@ -35,6 +35,17 @@ public class APIAlunoController {
     IAlunoServico alunoServico;
 
     @CrossOrigin
+    @GetMapping("alunos/{id}")
+    @Transactional
+    public ResponseEntity<Object> consultaPorId(@PathVariable Long id) {
+        logger.info("apicontroller consulta aluno por id");
+
+        return ResponseEntity.status(HttpStatus.OK).body(alunoServico.consultarPorId(id));
+    }
+
+
+
+    @CrossOrigin
     @GetMapping("alunos")
     @Transactional
     public ResponseEntity<Object> consultaAluno() {
