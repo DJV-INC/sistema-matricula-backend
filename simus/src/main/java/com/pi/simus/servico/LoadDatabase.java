@@ -1,18 +1,17 @@
 package com.pi.simus.servico;
 
 import java.util.Arrays;
-import java.util.Calendar;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.pi.simus.model.Aluno;
+import com.pi.simus.model.Boletim;
 import com.pi.simus.model.Disciplina;
 import com.pi.simus.model.IAlunoRepository;
+import com.pi.simus.model.IBoletimRepository;
 import com.pi.simus.model.IDisciplinaRepository;
 import com.pi.simus.model.IMatriculaRepository;
 import com.pi.simus.model.IProfessorRepository;
@@ -20,6 +19,7 @@ import com.pi.simus.model.ITurmaRepository;
 import com.pi.simus.model.Matricula;
 import com.pi.simus.model.Professor;
 import com.pi.simus.model.Turma;
+import com.pi.simus.model.Boletim.Conceito;
 import com.pi.simus.model.StatusMatricula;
 import com.pi.simus.model.Disciplina.Tipo;
 
@@ -27,9 +27,13 @@ import com.pi.simus.model.Disciplina.Tipo;
 public class LoadDatabase {
     Logger logger = LogManager.getLogger(this.getClass());
 
-
     @Bean
-    CommandLineRunner initDatabase(IProfessorRepository professorRepository, IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository, ITurmaRepository turmaRepository, IMatriculaRepository matriculaRepository) {
+    CommandLineRunner initDatabase(IProfessorRepository professorRepository, 
+    IAlunoRepository alunoRepository, 
+    IDisciplinaRepository disciplinaRepository, 
+    ITurmaRepository turmaRepository, 
+    IMatriculaRepository matriculaRepository,
+    IBoletimRepository boletimRepository) {
         return args -> {
         Aluno aluno1 = new Aluno("12345678910", "580940305", "23/03/2003", "03562020", "SP", "São Paulo", "Vila Nhocune", "Rua Doutor João Priore", 102, "teste@gmail.com","11999615887", "Aluno 1");
 
@@ -53,8 +57,10 @@ public class LoadDatabase {
         Disciplina disciplina1 = new Disciplina("Harmonia", Tipo.OBRIGATORIA);
 
         Disciplina disciplina2 = new Disciplina("Musica de Câmara", Tipo.OPTATIVA);
+        
+        Disciplina disciplina3 = new Disciplina("Teoria Musical", Tipo.OBRIGATORIA);
 
-        disciplinaRepository.saveAll(Arrays.asList(disciplina1, disciplina2));
+        disciplinaRepository.saveAll(Arrays.asList(disciplina1, disciplina2, disciplina3));
 
         Turma turma1 = new Turma(professor3, disciplina1, "18:00", 10, 0, "Quinta-feira");
 
@@ -64,7 +70,9 @@ public class LoadDatabase {
         
         Turma turma4 = new Turma(professor3, disciplina2, "09:00", 15, 0, "Segunda-feira");
 
-        turmaRepository.saveAll(Arrays.asList(turma1,turma2,turma3,turma4));
+        Turma turma5 = new Turma(professor1, disciplina3, "14:00", 15, 0, "Quinta-feira");
+
+        turmaRepository.saveAll(Arrays.asList(turma1,turma2,turma3,turma4, turma5));
 
         Matricula matricula1 = new Matricula(aluno1, turma1);
 
@@ -72,12 +80,18 @@ public class LoadDatabase {
 
         Matricula matricula3 = new Matricula(aluno3, turma3);
 
-        Matricula matricula4 = new Matricula(aluno1, turma4);
+        Matricula matricula4 = new Matricula(aluno1, turma2);
 
         Matricula matricula5 = new Matricula(aluno2, turma1);
 
         matriculaRepository.saveAll(Arrays.asList(matricula1, matricula2, matricula3, matricula4, matricula5));
 
+        Boletim boletim1 = new Boletim(aluno1, 
+        turma1.getDisciplina().getNome(), 
+        turma1.getProfessor().getNomeCompleto(), 
+        2, 10, Conceito.APROVADO, "1° Semestre 2023");
+
+        boletimRepository.save(boletim1);
 
         logger.info("Loaddatabase -> alunos, professores, disciplinas, turmas e matriculas cadastradas");
         };
