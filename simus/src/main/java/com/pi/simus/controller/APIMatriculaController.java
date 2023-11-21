@@ -46,12 +46,12 @@ public class APIMatriculaController {
     ITurmaServico turmaServico;
 
     @CrossOrigin
-    @GetMapping(value = "matriculas", params = "cpf")
+    @GetMapping(value = "matriculas", params = "idAluno")
     @Transactional
-    public ResponseEntity<Object> consultaPorAluno(@RequestParam(value = "cpf") String cpf) {
+    public ResponseEntity<Object> consultaPorAluno(@RequestParam(value = "idAluno") Long idAluno) {
         logger.info("apicontroller consultaPorAluno");
 
-        Optional<Aluno> aluno = alunoServico.consultarPorCpf(cpf);
+        Optional<Aluno> aluno = alunoServico.consultarPorId(idAluno);
 
         List<Matricula> matricula = matriculaServico.consultaPorAluno(aluno);
 
@@ -75,15 +75,16 @@ public class APIMatriculaController {
     @CrossOrigin
     @PostMapping("matriculas")
     @Transactional
-    public ResponseEntity<Object> cadastrarMatricula(@RequestParam(value = "cpf") String cpf,
-            @RequestParam(value = "idTurma") Long idTurma,
-            @RequestBody Matricula matricula) {
+    public ResponseEntity<Object> cadastrarMatricula(@RequestParam(value = "idAluno") Long idAluno,
+            @RequestParam(value = "idTurma") Long idTurma) {
 
         logger.info("Matricula controller cadastrar Matricula");
 
-        Optional<Aluno> aluno = alunoServico.consultarPorCpf(cpf);
+        Optional<Aluno> aluno = alunoServico.consultarPorId(idAluno);
 
         Optional<Turma> turma = turmaServico.consultaPorId(idTurma);
+
+        Matricula matricula = new Matricula();
 
         matricula.setAluno(aluno.get());
         matricula.setTurma(turma.get());
