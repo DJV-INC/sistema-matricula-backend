@@ -1,7 +1,8 @@
 ### Fatec - Centro Paula Souza
 ##### Curso - Desenvolvimento de Software Multiplataforma
 ##### Estudo de Caso – 
-> No contexto do projeto interdisciplinar o estudo de caso tem como objetivo desenvolver e implantar o Sistema _nome do projeto_. O projeto tem como objetivo facilitar o processo de matrícula dos alunos na instituição. Também gerenciar disciplinas, professores e as turmas dessa instituição, além de relátorios dos alunos para os funcionários
+> No contexto do projeto interdisciplinar o estudo de caso tem como objetivo desenvolver e implantar o Sistema SIMUS. O projeto tem como objetivo facilitar o processo de matrícula dos alunos na instituição. Também gerenciar disciplinas, professores e as turmas dessa instituição, além de relátorios dos alunos para os funcionários
+
 Time de desenvolvimento
 - Douglas Nascimento
 - Jackeline Menezes
@@ -49,7 +50,7 @@ melhora a produtividade do time.
 > | RF20 - Inserir matrícula | Como – Aluno, Eu quero – Inserir matrícula, De maneira que – O aluno possa se inscrever nas disciplinas que deseja (deve) cursar nesse semestre | Alta |
 > | RF21 - Consultar matrícula  | Como – Aluno, Eu quero – Consultar matrícula, De maneira que – O aluno possa visualizar as disciplinas que ele se matriculou, e os respectivos horários/professores | Alta |
 > | RF22 - Alterar matrícula | Como – Aluno, Eu quero – Alterar matrícula, De maneira que – O aluno possa alterar o horário/turma da disciplina desejada, caso esteja dentro do prazo estipulado | Alta |
-> | RF23 - Excluir matrícula | Como – Aluno, Eu quero – Inserir Excluir matrícuka, De maneira que – O aluno possa trancar a disciplina desejada, caso esteja dentro do prazo estipulado | Alta |
+> | RF23 - Excluir matrícula | Como – Aluno, Eu quero – Inserir Excluir matrícula, De maneira que – O aluno possa trancar a disciplina desejada, caso esteja dentro do prazo estipulado | Alta |
 > | RF24 - Inserir boletim | Como – Funcionário, Eu quero – Inserir boletim, De maneira que – O funcionário possa inserir as notas dos alunos no sistema, para a futura consulta dos alunos | Média |
 > | RF25 - Exibir boletim | Como – Aluno, Eu quero – Exibir boletim, De maneira que – O aluno possa visualizar as suas notas daquele semestre, e ver seu desempenho | Média |
 
